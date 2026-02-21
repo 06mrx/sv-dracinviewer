@@ -10,11 +10,46 @@
     let loading = $state(true);
     let error = $state('');
     let dramaId = $page.params.id;
+    let title = $page.url.searchParams.get('title') || '';
     let isPlaying = $state(false);
     let videoProgress = $state(0);
     let scrollY = $state(0);
-    
+    const HISTORY_KEY = 'drama_history_v1';
     let videoRef;
+    let currentDrama = {}
+    function loadHistory() {
+        if (typeof window !== 'undefined') {
+            const saved = localStorage.getItem(HISTORY_KEY);
+            if (saved) {
+                try {
+                    historyItems = JSON.parse(saved);
+                } catch (e) {
+                    console.error('Failed to parse history', e);
+                }
+            }
+        }
+    }
+    function loadFirstHistory() {
+        let historyItems = [];
+        if (typeof window !== 'undefined') {
+            const saved = localStorage.getItem(HISTORY_KEY);
+            if (saved) {
+                try {
+                    historyItems = JSON.parse(saved);
+                } catch (e) {
+                    console.error('Failed to parse history', e);
+                }
+            }
+        }
+        console.log('Loaded history items:', historyItems);
+        if (historyItems.length > 0) {
+            
+            currentDrama = historyItems[0];
+            console.log('Setting currentDrama from history:', currentDrama);
+            // dramaId = currentDrama.id;
+            // fetchChapters();
+        }
+    }
 
     async function fetchChapters() {
         loading = true;
@@ -112,6 +147,7 @@
     }
 
     onMount(() => {
+        loadFirstHistory();
         fetchChapters();
         
         const handleScroll = () => {
@@ -124,7 +160,7 @@
 
     let currentChapter = $derived(chapters[currentChapterIndex]);
     let currentVideo = $derived(currentChapter ? getSafeVideoUrl(currentChapter) : '');
-    let currentTitle = $derived(currentChapter?.chapterName || `Episode ${currentChapterIndex + 1}`);
+    let currentTitle = $derived(currentDrama?.name || `Episode ${currentChapterIndex + 1}`);
 </script>
 
 <svelte:head>
@@ -155,8 +191,8 @@
             </button>
 
             <div class="header-info">
-                <h1 class="page-title">Selamat MenontonG</h1>
-                <p class="page-subtitle">Drama ID: {dramaId}</p>
+                <h1 class="page-title">{title}</h1>
+                <p class="page-subtitle">Drama ID: {currentDrama?.id || dramaId}</p>
             </div>
         </header>
 
@@ -449,7 +485,7 @@
 
     .page-title {
         font-family: 'Playfair Display', serif;
-        font-size: 28px;
+        font-size: 10px;
         font-weight: 700;
         margin: 0;
         background: linear-gradient(135deg, #ffffff 0%, #e0c3fc 100%);
@@ -976,7 +1012,7 @@
         }
 
         .page-title {
-            font-size: 24px;
+            font-size: 15px;
         }
 
         .video-title {

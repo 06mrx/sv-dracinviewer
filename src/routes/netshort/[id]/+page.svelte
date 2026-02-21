@@ -237,11 +237,11 @@
                 <div class="header-info">
                     <h1 class="page-title">{metaData.shortPlayName}</h1>
                     <p class="page-subtitle">Netshort ID: {shortPlayId}</p>
-                    <div class="tags-wrapper">
+                    <!-- <div class="tags-wrapper">
                         {#each metaData.shortPlayLabels as tag}
                             <span key={'xxx'} class="tag-badge">{tag}</span>
                         {/each}
-                    </div>
+                    </div> -->
                 </div>
             {:else}
                 <div class="header-info">
@@ -397,7 +397,7 @@
                                 {#each episodes as ep, i}
                                     <button
                                         onclick={() => playEpisode(i)}
-                                        class="episode-button {i === currentEpisodeIndex ? 'active' : 'active'}"
+                                        class="episode-button {i === currentEpisodeIndex ? 'active' : ''}"
                                         title={`Episode ${ep.episodeNo}`}
                                     >
                                         <span class="episode-number">{ep.episodeNo}</span>
@@ -1138,7 +1138,7 @@
         }
 
         .page-title {
-            font-size: 24px;
+            font-size: 15px;
         }
 
         .video-title {

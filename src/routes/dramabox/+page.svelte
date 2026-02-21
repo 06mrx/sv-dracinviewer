@@ -187,8 +187,8 @@
             : textContent;
     }
 
-    function viewDetail(id) {
-        goto(`/${id}`);
+    function viewDetail(id,title) {
+        goto(`/dramabox/${id}?title=${encodeURIComponent(title)}`);
     }
     
     // --- OBSERVER & LIFECYCLE ---
@@ -343,7 +343,7 @@
                             }}
                             <article 
                                 class="drama-card"
-                                onclick={() => { addToHistory(cardData); viewDetail(cardData.id); }}
+                                onclick={() => { addToHistory(cardData); viewDetail(cardData.id, cardData.name); }}
                             >
                                 <div class="card-image-wrapper">
                                     <img 
@@ -396,7 +396,7 @@
                             {#each historyItems as item (item.id)}
                                 <article 
                                     class="history-card"
-                                    onclick={() => viewDetail(item.id)}
+                                    onclick={() => viewDetail(item.id, item.name)}
                                 >
                                     <div class="history-img-wrapper">
                                         <img 
@@ -455,7 +455,7 @@
                                 {@const cardData = { ...drama, id: drama.bookId, name: drama.bookName, cover: drama.coverWap, cornerName: drama.corner?.name, cornerColor: drama.corner?.color }}
                                 <article 
                                     class="drama-card"
-                                    onclick={() => { addToHistory(cardData); viewDetail(cardData.id); }}
+                                    onclick={() => { addToHistory(cardData); viewDetail(cardData.id, cardData.name); }}
                                     style="animation-delay: {i * 0.05}s"
                                 >
                                     <div class="card-image-wrapper">
@@ -524,7 +524,7 @@
                         <div class="horizontal-scroll-container">
                             {#each trendingItems as drama (drama.bookId)}
                                 {@const cardData = { ...drama, id: drama.bookId, name: drama.bookName, cover: drama.coverWap, cornerName: drama.corner?.name, cornerColor: drama.corner?.color }}
-                                <div class="h-scroll-card" onclick={() => { addToHistory(cardData); viewDetail(cardData.id); }}>
+                                <div class="h-scroll-card" onclick={() => { addToHistory(cardData); viewDetail(cardData.id, cardData.name); }}>
                                     <div class="h-scroll-image">
                                         <img src={cardData.cover} alt={cardData.name} loading="lazy" />
                                         {#if cardData.cornerName}
@@ -554,7 +554,7 @@
                                 {@const cardData = { ...drama, id: drama.bookId, name: drama.bookName, cover: drama.coverWap, cornerName: drama.corner?.name, cornerColor: drama.corner?.color }}
                                 <article 
                                     class="drama-card popular-card"
-                                    onclick={() => { addToHistory(cardData); viewDetail(cardData.id); }}
+                                    onclick={() => { addToHistory(cardData); viewDetail(cardData.id, cardData.name); }}
                                 >
                                     <div class="card-image-wrapper">
                                         <img 
