@@ -6,6 +6,7 @@
 
   $: isDramabox = pathname.startsWith('/dramabox');
   $: isNetshort = pathname.startsWith('/netshort');
+  $: isMelolo = pathname.startsWith('/melolo');
 </script>
 
 <div class="floating-bar">
@@ -23,6 +24,14 @@
     class:active={isNetshort}
   >
     Netshort
+  </a>
+
+   <a
+    href="/melolo"
+    class="tab"
+    class:active={isMelolo}
+  >
+    Melolo
   </a>
 </div>
 

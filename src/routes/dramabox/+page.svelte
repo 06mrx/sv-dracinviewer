@@ -2,7 +2,7 @@
     import { onMount } from 'svelte';
     import { toast, Toaster } from 'svelte-french-toast';
     import { debounce } from '$lib/services/functionService';
-    import { PUBLIC_API_URL2, PUBLIC_APP_NAME } from '$env/static/public';
+    import { PUBLIC_API_URL, PUBLIC_APP_NAME } from '$env/static/public';
     import { goto } from '$app/navigation';
 	import FloatingBar from '$lib/components/FloatingBar.svelte';
 
@@ -79,9 +79,9 @@
         error = '';
 
         try {
-            if (!PUBLIC_API_URL2) throw new Error("API_URL2 is not defined");
+            if (!PUBLIC_API_URL) throw new Error("API_URL2 is not defined");
 
-            const apiUrl = `${PUBLIC_API_URL2}/api/dramabox/dubindo?classify=terbaru&page=${pageDub}`;
+            const apiUrl = `${PUBLIC_API_URL}/api/dramabox/dubindo?classify=terbaru&page=${pageDub}`;
             const response = await fetch(apiUrl);
             const result = await response.json();
 
@@ -113,8 +113,8 @@
     async function fetchTrending() {
         loadingTrending = true;
         try {
-            if (!PUBLIC_API_URL2) return;
-            const apiUrl = `${PUBLIC_API_URL2}/api/dramabox/trending`;
+            if (!PUBLIC_API_URL) return;
+            const apiUrl = `${PUBLIC_API_URL}/api/dramabox/trending`;
             const response = await fetch(apiUrl);
             const result = await response.json();
             if (Array.isArray(result)) {
@@ -131,8 +131,8 @@
     async function fetchPopular() {
         loadingPopular = true;
         try {
-            if (!PUBLIC_API_URL2) return;
-            const apiUrl = `${PUBLIC_API_URL2}/api/dramabox/populersearch`;
+            if (!PUBLIC_API_URL) return;
+            const apiUrl = `${PUBLIC_API_URL}/api/dramabox/populersearch`;
             const response = await fetch(apiUrl);
             const result = await response.json();
             if (Array.isArray(result)) {
@@ -160,7 +160,7 @@
         
         try {
             // UPDATE: Endpoint baru & parameter query
-            const apiUrl = `${PUBLIC_API_URL2}/api/dramabox/search?query=${encodeURIComponent(searchTerm)}`;
+            const apiUrl = `${PUBLIC_API_URL}/api/dramabox/search?query=${encodeURIComponent(searchTerm)}`;
             const response = await fetch(apiUrl);
             const result = await response.json();
 
