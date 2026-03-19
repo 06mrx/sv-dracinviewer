@@ -70,6 +70,25 @@
       <span class="absolute right-5 bottom-5 text-gray-600 group-hover:text-gray-300 group-hover:translate-x-1 transition-all duration-300 text-lg">→</span>
     </button>
 
+    <!-- Melolo -->
+    <button
+      on:click={() => goTo('/melolo')}
+      class="group relative w-64 h-40 rounded-2xl border border-white/5 bg-white/[0.03] backdrop-blur-md overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:scale-[1.02] hover:border-violet-500/40 hover:shadow-[0_20px_50px_rgba(139,92,246,0.25)]"
+    >
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(139,92,246,0.2),transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+
+      <div class="relative z-10 h-full flex flex-col justify-center items-start px-6 gap-1.5">
+        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500 to-purple-800 flex items-center justify-center mb-2">
+          <img src="/melolo.jpg" alt="Melolo" class="w-full h-full object-contain rounded-xl" />
+        </div>
+        <span class="text-xl font-bold text-violet-50 tracking-tight">Melolo</span>
+        <span class="text-xs text-gray-500 font-light">Short Film Collection</span>
+      </div>
+
+      <span class="absolute right-5 bottom-5 text-gray-600 group-hover:text-gray-300 group-hover:translate-x-1 transition-all duration-300 text-lg">→</span>
+    </button>
+
   </div>
 
   <!-- Footer -->
